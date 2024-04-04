@@ -34,13 +34,14 @@ jobs:
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
           popd
-      
+          
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+        
       - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_48BC342FA37F408C84AA6382849E1FCF }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5D6D3C997FD8400B9CCF8B04DBE977B8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_502D58A9DF7B4B3D96B38DFEF5977E17 }}
+        run: az login --service-principal -u ${{ secrets.AZURE_SP_CLIENT_ID }} -p ${{ secrets.AZURE_SP_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
