@@ -34,13 +34,9 @@ jobs:
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
           popd
-          
-      - name: Install Azure CLI
-         runas /user:pradeep.somas@hcl.com https://aka.ms/InstallAzureCLIDeb
-        
+      
       - name: Login to Azure
-        run: az login --service-principal -u ${{ secrets.AZURE_SP_CLIENT_ID }} -p ${{ secrets.AZURE_SP_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-
+        run: az login --username pradeep.somas@hcl.com --password Kranti@2024
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
