@@ -58,7 +58,7 @@ namespace TriggerPFA
 					
 
 					log.LogInformation($"Response from Power Automate flow: {keyValue}");
-					return new OkObjectResult("Appointment id is :"+keyValue);
+					return new OkObjectResult("Appointment id is (GITHUB) :"+keyValue);
 				}
 				else
 				{
