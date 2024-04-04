@@ -36,7 +36,7 @@ jobs:
           popd
       
       - name: Login to Azure
-        run: az login --username pradeep.somas@hcl.com --password Kranti@2024
+        run: az login --username 'pradeep.somas@hcl.com' --password 'Kranti@2024'
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
