@@ -1,0 +1,30 @@
+name: Create Service Bus Namespace
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create_namespace:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Azure CLI
+        uses: azure/setup-azure-cli@v1
+        with:
+          azcliversion: 'latest'
+
+      - name: Create Service Bus Namespace
+        env:
+          AZURE_USERNAME: ${{ secrets.AZURE_USERNAME }}
+          AZURE_PASSWORD: ${{ secrets.AZURE_PASSWORD }}
+        run: |
+          az login --username $AZURE_USERNAME --password $AZURE_PASSWORD
+          az servicebus namespace create \
+            --resource-group powerautomat \
+            --name TESTServiceBusNamespace \
+            --location eastus
