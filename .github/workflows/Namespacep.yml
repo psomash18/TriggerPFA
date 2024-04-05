@@ -26,5 +26,5 @@ jobs:
           az login --username $AZURE_USERNAME --password $AZURE_PASSWORD
           az servicebus namespace create \
             --resource-group powerautomat \
-            --name TESTServiceBusNamespace \
+            --name TEST1ServiceBusNamespace \
             --location eastus
